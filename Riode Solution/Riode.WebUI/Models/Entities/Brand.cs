@@ -13,7 +13,5 @@ namespace Riode.WebUI.Models.Entities
 		public int Id { get; set; }
 		[Required]
 		public string Name { get; set; }
-
-		
 	}
 }

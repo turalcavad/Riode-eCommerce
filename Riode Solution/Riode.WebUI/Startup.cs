@@ -34,14 +34,21 @@ namespace Riode.WebUI
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
+			app.UseDeveloperExceptionPage();
 			app.UseRouting();
 			app.UseStaticFiles();
 			app.UseEndpoints(cfg => 
 			{
 				cfg.MapControllerRoute("default", pattern: "{controller=home}/{action=index}/{id?}");
 				configuration.GetConnectionString("cString");
-			
+
+				cfg.MapAreaControllerRoute(
+					name: "default",
+					areaName: "Admin",
+					pattern: "{controller=dashboard}/{action=index}/{id?}");
 			});
+
+			
 			
 		}
 	}
