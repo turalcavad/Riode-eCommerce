@@ -1,0 +1,375 @@
+﻿@model Riode.WebUI.Models.Entities.Product
+
+@{
+	ViewData["Title"] = "Edit";
+}
+
+<div class="page-header">
+	<div class="row align-items-end">
+		<div class="col-lg-8">
+			<div class="page-header-title">
+				<div class="d-inline">
+					<h4>Edit Product</h4>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="page-header-breadcrumb">
+				<ul class="breadcrumb-title">
+					<li class="breadcrumb-item" style="float: left;">
+						<a asp-controller="dashboard" asp-action="index"> <i class="feather icon-home"></i> </a>
+					</li>
+					<li class="breadcrumb-item" style="float: left;">
+						<a href="#!">Brendler</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="page-body">
+	<div class="card p-3">
+		<div class="card-block">
+			<form class="row" asp-action="Create" enctype="multipart/form-data" id="productCreate">
+				<div class="col-12 col-lg-6">
+					<div class="form-group">
+						<div style="width: 100%" class="imager-container" id="viewer1" name="Images">
+							@foreach (var item in Model.Images)
+							{
+									<label thumb-url='/uploads/images/products/@item.ImagePath' image-id="@item.Id" checked="true" @(item.IsMain?" checked":"")></label>
+
+							}
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-lg-6">
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group">
+								<label asp-for="Name" class="control-label"></label>
+								<input asp-for="Name" class="form-control" />
+							</div>
+						</div>
+						<div class="col-12 col-lg-6">
+							<div class="form-group">
+								<label asp-for="StockKeepingUnit" class="control-label"></label>
+								<input asp-for="StockKeepingUnit" class="form-control" />
+							</div>
+						</div>
+						<div class="col-12 col-lg-6">
+							<div class="form-group">
+								<label class="control-label">Brand</label>
+								<select asp-for="BrandId" class="form-control" asp-items="ViewBag.BrandId"></select>
+							</div>
+						</div>
+						<div class="col-12 col-lg-6">
+							<div class="form-group">
+								<label asp-for="ShortDescription" class="control-label"></label>
+								<input asp-for="ShortDescription" class="form-control" />
+							</div>
+						</div>
+						<div class="col-12 col-lg-6">
+							<div class="form-group">
+								<label asp-for="Description" class="control-label"></label>
+								<input asp-for="Description" class="form-control" />
+							</div>
+						</div>
+						<div class="col-12 col-lg-6">
+							<div class="form-group">
+								<label class="control-label">Category</label>
+								<select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-12">
+					<div class="tab-control" role="tabcontrol">
+						<div class="tab-page" id="specifications" aria-title="Specifications" selected>
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Specification</th>
+										<th>Value</th>
+									</tr>
+								</thead>
+								<tbody>
+
+									@{
+										int index = 0;
+
+									}
+									@foreach (var item in ViewBag.Specifications)
+									{
+										var specValue = Model.Specifications.FirstOrDefault(s => s.SpecificationId == item.Id)?.Value;
+
+										<tr>
+											<td>
+												@item.Name
+											</td>
+											<td>
+												<input type="text"
+													   class="form-control w-100"
+													   value="@specValue"
+													   data-specification-id="@item.Id" />
+											</td>
+										</tr>
+
+										index++;
+									}
+
+								</tbody>
+							</table>
+						</div>
+						<div class="tab-page" id="pricing" aria-title="Qiymetlendirme">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Color</th>
+										<th>Size</th>
+										<th>Price</th>
+										<th class="table-operations">
+											<button class="btn btn-info" onclick="createPricing(event)">
+												Add row
+											</button>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach (var item in Model.Pricing)
+									{
+										<tr>
+
+											<td>
+												<select class="form-control select2" asp-items="@ViewBag.Colors" selected-id="@item.ColorId"></select>
+											</td>
+											<td>
+												<select class="form-control select2" asp-items="@ViewBag.Sizes" selected-id="@item.ColorId"></select>
+											</td>
+											<td>
+											<td>
+												<input class="form-control select2" type="text" value="@item.Price" />
+											</td>
+										
+										</tr>
+
+
+
+									}
+								</tbody>
+								</table>
+						</div>  
+					</div>
+				</div>
+				<div class="col-12">
+					<div class="form-group">
+						<input type="submit" value="Create" class="btn btn-success" />
+						<a asp-action="Index" class="btn btn-primary">Back to List</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+@section css{
+	<link rel="stylesheet" type="text/css" href="~/admin/assets/libs/multiple-imager-js/css/imager.css">
+	<link rel="stylesheet" type="text/css" href="~/admin/assets/libs/tab-control/tab-control.css">
+	<link href="~/admin/assets/libs/tab-control/tab-control.css" rel="stylesheet" />
+	<link href="~/admin/assets/libs/select2/css/select2.css" rel="stylesheet" />
+}
+
+@section js{
+	<script src="~/admin/assets/libs/multiple-imager-js/js/imager.js"></script>
+	<script src="~/admin/assets/libs/tab-control/tab-control.js"></script>
+	<script src="~/admin/assets/libs/select2/js/select2.js"></script>
+	<script>
+
+		const selectColors = `@Html.DropDownList("ColorId",@ViewBag.Colors,null,htmlAttributes:new {
+                @class="form-control select2",
+                id="#s1#"
+                })`;
+        const selectSizes = `@Html.DropDownList("SizeId",@ViewBag.Sizes,null,htmlAttributes:new {
+                @class="form-control select2",
+                id="#s2#"
+                })`;
+
+		$('#viewer1').imgadd({
+			tnWidth: '120px',
+			tnHeight: '120px',
+			fontSize: '55px',
+			plusInnerHtml: '',
+			plusBtnClass: undefined
+		});
+
+		$('#pricing select').each(function(index, item)
+		{
+			let selectedId = $(item).attr('selected-id');
+
+			$(item).val(selectedId).trigger('change');
+		});
+
+		$("#productCreate").submit(function (e) {
+			e.preventDefault();
+
+			const btn = $(e.currentTarget).find('input[type=submit]');
+
+			$(btn).attr("disable", "disabled");
+
+			var formData = new FormData(e.currentTarget);
+
+			let indexer = 0;
+			$('input[data-specification-id]').each(function (index, item) {
+				const id = $(item).data('specification-id');
+				const value = $(item).val();
+
+				if (value.length == 0)
+					return;
+
+				formData.set(`Specification[${indexer}].Id`, id);
+				formData.set(`Specification[${indexer}].Value`, value);
+
+
+				indexer++;
+			});
+
+			let pricing = [];
+
+			$('#pricing tbody tr').each(function (index, item) {
+				const colorId = $(item).find('td:nth-child(1) select').val();
+				const sizeId = $(item).find('td:nth-child(2) select').val();
+				const value = $(item).find('input[type=text]').val();
+
+
+
+				const filtered = pricing.filter((pItem) => {
+					return pItem.colorId == colorId && pItem.sizeId == sizeId;
+				});
+
+				if (filtered.length > 0) {
+					return;
+				}
+
+				pricing.push({
+					colorId: colorId,
+					sizeId: sizeId,
+					price: value,
+				});
+
+				console.log(colorId, sizeId, value);
+
+			});
+
+			$(pricing).each(function (index, item) {
+				formData.set(`Pricing[${index}].SizeId`, item.sizeId);
+				formData.set(`Pricing[${index}].ColorId`, item.colorId);
+				formData.set(`Pricing[${index}].Price`, item.price);
+			});
+
+			$.ajax({
+				url: '@Url.Action("Edit")',
+				type: "post",
+				data: formData,
+				contentType: false,
+				processData: false,
+				success: function (response) {
+					if (response.error == undefined) {
+						let errors = response.errors.map(err => {
+							return {
+								propertyName: err.propertyName,
+								errorMessage: err.errorMessage
+							};
+						});
+
+						showErrors(errors);
+						return;
+					}
+					else if (response.error == true) {
+						toastr.error(response.message, "Something went wrong!")
+						$(btn).removeAttr("disable");
+						return;
+					}
+					toastr.success(response.message, "Success!")
+					location.href = `@Url.Action("Index")`;
+
+				},
+				error: function (response) {
+					$(btn).removeAttr("disable");
+					console.warn(response)
+				}
+			});
+
+
+		});
+
+
+
+		function showErrors(errors) {
+			errors = errors.filter(function (item, index, arr) {
+				return arr.map(a => a.propertyName).indexOf(item.propertyName) == index;
+			});
+
+			console.log(errors);
+			$(`#productCreate span.error`).html('');
+
+			$(errors).each(function (index, item) {
+
+				const el = $(`#productCreate input[name="${item.propertyName}"]`);
+
+				let spanError = $(el).next('span.error');
+
+				if (spanError.length == 0) {
+					spanError = $('<span/>', {
+						class: 'error',
+						html: item.errorMessage
+					});
+
+					$(spanError).insertAfter(el);
+				}
+				else {
+					$(spanError).html(item.errorMessage);
+				}
+			});
+		}
+
+
+		function createPricing(e) {
+
+			e.preventDefault();
+
+			const tBody = $(e.currentTarget).closest('table').find('tbody');
+			const tr = $(`<tr>
+                            <td>${(selectColors.replace('#s1#', newid()))}</td>
+                            <td>${(selectSizes.replace('#s2#', newid()))}</td>
+                            <td><input type="text" class="w-100 form-control"/></td>
+                            </tr>`);
+
+
+			$(tr).find('.select2').each(function (index, item) {
+				$(item).select2();
+			});
+
+			$(tBody).append(tr);
+
+		}
+
+		function removePricing(e) {
+			if ($(e.currentTarget).closest('tbody').find('tr').length == 1)
+				return;
+
+			$(e.currentTarget).closest('tr').remove();
+		}
+
+
+		function newid() {
+			return "s" + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+				var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+				return v.toString(16);
+			});
+		}
+	</script>
+}
+
+
+

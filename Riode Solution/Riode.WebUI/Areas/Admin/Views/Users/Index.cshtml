@@ -1,0 +1,130 @@
+﻿@model PagedViewModel<RiodeUser>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+
+<div class="page-header">
+	<div class="row align-items-end">
+		<div class="col-lg-8">
+			<div class="page-header-title">
+				<div class="d-inline">
+					<h4>Users</h4>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div class="page-body">
+
+	<div class="card">
+
+		<div class="card-block table-border-style">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+
+							<th>
+								User
+							</th>
+							<th>
+								Email
+							</th>
+							<th>
+								Email Confirmed
+							</th>
+							<th class="text-right">
+								@if (User.HasAccess("admin.brands.create"))
+								{
+									<a asp-action="Create" class="btn btn-sm btn-primary">
+										<i class="fa-solid fa-plus"></i>
+									</a>
+								}
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model.Items)
+						{
+							<tr data-entity-id="@item.Id">
+
+								<td>
+									@item.Name @item.Surname
+								</td>
+								<td>
+									@item.Email
+								</td>
+								<td>
+									<div class="btn @(item.EmailConfirmed ? "btn-success" : "btn-danger" )">
+										@(item.EmailConfirmed ? "Confirmed" : "Not confirmed")
+
+									</div>
+								</td>
+								<td class="operate-cell text-right">
+
+									@if (User.HasAccess("admin.users.edit"))
+									{
+										<a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square"></i> </a>
+									}
+
+									@if (User.HasAccess("admin.users.details"))
+									{
+										<a class="btn btn-sm btn-secondary" asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-eye"></i></a>
+									}
+									@if (User.HasAccess("admin.users.delete"))
+									{
+										<a onclick="removeEntity(event,@item.Id,'@item.Name')" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>
+									}
+
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section js{
+	<script src="~/admin/assets/libs/sweetalert/sweetalert.min.js"></script>
+
+	<script>
+		function removeEntity(ev,entityId,name) {
+			swal({
+				title: "Are you sure?",
+				text: `Once deleted, you will not be able to recover ${name} !`,
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			})
+				.then((willDelete) => {
+					if (willDelete) {
+
+
+						$.ajax({
+							url: `@Url.Action("Delete")/${entityId}`,
+							type: 'post',
+							success: function (response)
+							{
+								if (response.error == true) {
+									toastr.error(response.message, "Error!")
+									return;
+								}
+								toastr.success(response.message, "Success!")
+
+								$(`tr[data-entity-id=${entityId}]`).remove();
+							},
+							error: function (response) {console.warn(response) },
+						});
+					}
+				});
+		}
+	</script>
+}
+

@@ -54,7 +54,21 @@ namespace Riode.WebUI.AppCode.Extensions
 
 			sb.Append("</li>");
 
+		}
 
+		static public IEnumerable<Category> GetChildren(this Category category) 
+		{
+			if(category.ParentId!= null)
+				yield return category;
+
+			if (category.Children != null)
+			{ 
+				foreach (var item in category.Children.SelectMany(c => c.GetChildren()))
+				{
+					yield return item;
+				}
+			
+			}
 		}
 	}
 }

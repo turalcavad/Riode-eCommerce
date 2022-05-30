@@ -1,0 +1,133 @@
+﻿@model BlogPost
+
+@{
+	ViewData["Title"] = "Create";
+}
+
+
+<div class="page-body">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="card">
+
+				<div class="card-block">
+					<h4 class="sub-title">Basic Inputs</h4>
+					<form method="post" enctype="multipart/form-data">
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">
+								Title
+							</label>
+							<div class="col-sm-10">
+								<input asp-for="Title" class="form-control">
+								<span asp-validation-for="Title" class="col-form-label">
+								</span>
+							</div>
+						</div>
+
+
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">
+								Parent
+							</label>
+							<div class="col-sm-10">
+
+								<select class="form-control select2" asp-for="CategoryId" asp-items="@ViewBag.CategoryId">
+									<option value="" selected disabled>All categories</option>
+								</select>
+								<span asp-validation-for="CategoryId" class="col-form-label">
+								</span>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">
+								Tags
+							</label>
+							<div class="col-sm-10">
+								<select name="tagIds" asp-items="@ViewBag.Tags" class="multipleSelect" multiple>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="filepond" class="col-sm-2 col-form-label">
+								Image
+							</label>
+							<div class="col-sm-10">
+								<label for="file" class="file-viewer"></label>
+								<input type="file" id="file" name="file" onchange="readFile(this)" />
+								<span asp-validation-for="ImagePath" class="col-form-label"></span>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">
+								Title
+							</label>
+							<div class="col-sm-10">
+								<textarea asp-for="Body" class="form-control ckeditor"></textarea>
+								<span asp-validation-for="Body" class="col-form-label"></span>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<button type="submit" class="btn btn-success ml-1">Save changes</button>
+							<a asp-action="index" class="btn btn-inverse ml-1">Back to List</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section js{
+	<script src="~/admin/assets/libs/filepond/filepond.js"></script>
+	<script src="~/admin/assets/libs/ckeditor5/ckeditor.js"></script>
+	<script src="~/admin/assets/libs/select2/js/select2.min.js"></script>
+	<script src="~/admin/assets/libs/fastselect/fastsearch.js"></script>
+	<script src="~/admin/assets/libs/fastselect/fastselect.js"></script>
+	<script>
+
+
+		document.querySelectorAll(".ckeditor").forEach(function (item) {
+			ClassicEditor
+				.create(item)
+				.then(editor => {
+					console.log(editor);
+				})
+				.catch(error => {
+					console.error(error);
+				});
+		});
+
+		$(".select2").select2();
+
+		$('.multipleSelect').fastselect();
+
+		function readFile(input) {
+			let file = input.files[0];
+
+			let reader = new FileReader();
+
+			
+
+			reader.onload = function () {
+				console.log(reader.result);
+				$(".file-viewer").css("background-image", `url(${reader.result})`)
+			};
+
+			reader.onerror = function () {
+				console.log(reader.error);
+			};
+			reader.readAsDataURL(file);
+		}
+	</script>
+
+}
+@section css{
+	<link href="~/admin/assets/libs/fastselect/fastselect.css" rel="stylesheet" />
+	<link href="~/admin/assets/libs/filepond/filepond.css" rel="stylesheet" />
+	<link href="~/admin/assets/libs/select2/css/select2.css" type="text/css" rel="stylesheet" />
+	<link href="~/admin/assets/libs/select2/css/select2-override.css" type="text/css" rel="stylesheet" />
+}

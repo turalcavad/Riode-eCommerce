@@ -1,0 +1,17 @@
+﻿@using Riode.WebUI.AppCode.Infrastructure 
+@model CommandJsonResponse
+@{
+	ViewData["Title"] = "SubscribeConfirm";
+}
+
+@if (Model.Error)
+{
+    <div class="alert alert-danger d-flex justify-content-center text-white">
+        @Model.Message 
+    </div>
+}
+else { 
+<div class="alert alert-success d-flex justify-content-center text-white" role="alert">
+	@Model.Message <a asp-action="Index" asp-controller="Home" class="alert-link">Homepage</a>
+</div>
+}

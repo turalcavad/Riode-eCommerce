@@ -1,0 +1,38 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "sweetalert@2.1.2",
+      "destination": "wwwroot/admin/assets/libs/sweetalert/"
+    },
+    {
+      "library": "toastr.js@2.1.4",
+      "destination": "wwwroot/admin/assets/libs/toastr.js/"
+    },
+    {
+      "library": "jquery-treegrid@0.2.0",
+      "destination": "wwwroot/admin/assets/libs/jquery-treegrid/"
+    },
+    {
+      "library": "select2@4.0.13",
+      "destination": "wwwroot/admin/assets/libs/select2/"
+    },
+    {
+      "library": "ckeditor5@34.0.0",
+      "destination": "wwwroot/admin/assets/libs/ckeditor5/"
+    },
+    {
+      "library": "filepond@4.30.3",
+      "destination": "wwwroot/admin/assets/libs/filepond/"
+    },
+    {
+      "library": "fastselect@0.7.3",
+      "destination": "wwwroot/admin/assets/libs/fastselect/"
+    },
+    {
+      "library": "uppy@2.9.5",
+      "destination": "wwwroot/admin/assets/libs/uppy/"
+    }
+  ]
+}

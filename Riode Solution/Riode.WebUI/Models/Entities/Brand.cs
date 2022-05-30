@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Riode.WebUI.AppCode.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace Riode.WebUI.Models.Entities
 {
-	public class Brand
+	public class Brand : BaseEntity
 	{
-		[Required]
-		public int Id { get; set; }
+		
 		[Required]
 		public string Name { get; set; }
 	}

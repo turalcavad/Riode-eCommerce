@@ -1,0 +1,105 @@
+﻿@model Riode.WebUI.Models.Entities.BlogPost
+
+@{
+	ViewData["Title"] = "Details";
+}
+<div class="page-body">
+	<div class="row">
+		<div class="col-sm-12">
+			<!-- Basic Form Inputs card start -->
+			<div class="card">
+
+				<div class="card-block">
+					<h4 class="sub-title">Blog Posts</h4>
+					<form method="post" enctype="multipart/form-data">
+
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">
+								Title
+							</label>
+							<div class="col-sm-10">
+								<p asp-for="Title" class="form-control">@Model.Title</p>
+								<span asp-validation-for="Title" class="col-form-label">
+								</span>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">
+								Category
+							</label>
+							<div class="col-sm-10">
+								<p class="form-control">@Model.Category.Name</p>
+								<span asp-validation-for="CategoryId" class="col-form-label">
+								</span>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<p class="col-sm-2 col-form-label">
+								Image
+							</p>
+							<div class="col-sm-10">
+
+								<div class="preview-img" style="background-image: url(/uploads/images/blog/@Model.ImagePath)"></div>
+
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">
+								Content
+							</label>
+							<div class="col-sm-10">
+								<textarea asp-for="Body" class="form-control ckeditor"></textarea>
+								<span asp-validation-for="Body" class="col-form-label"></span>
+							</div>
+						</div>
+
+
+						<div class="form-group col-12">
+							<input type="hidden" asp-for="Id" />
+							<button type="submit" class="btn btn-success">Save changes</button>
+							<a asp-action="index" class="btn btn-inverse">Back to List</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+@section css{
+	<link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+		  rel="stylesheet" />
+	<link href="~/admin/assets/libs/filepond/filepond.css" rel="stylesheet" />
+	<link href="~/admin/assets/libs/select2/css/select2.css" rel="stylesheet" />
+	<link href="~/admin/assets/libs/select2/css/select2-override.css" rel="stylesheet" />
+}
+
+@section js{
+	<script src="~/admin/assets/libs/filepond/filepond.js"></script>
+	<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+	<script src="~/admin/assets/libs/ckeditor5/ckeditor.js"></script>
+	<script src="~/admin/assets/libs/select2/js/select2.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$(".select2").select2();
+		})
+		document.querySelectorAll(".ckeditor").forEach(function (item) {
+			ClassicEditor
+				.create(item)
+				.then(editor => {
+					console.log(editor);
+				})
+				.catch(error => {
+					console.error(error);
+				});
+		});
+
+	</script>
+
+
+
+}

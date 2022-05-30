@@ -1,0 +1,119 @@
+﻿@model PagedViewModel<Riode.WebUI.Models.Entities.BlogPost>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<div class="page-header">
+	<div class="row align-items-end">
+		<div class="col-lg-8">
+			<div class="page-header-title">
+				<div class="d-inline">
+					<h4>Blog Posts</h4>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div class="page-body">
+
+	<div class="card">
+
+		<div class="card-block table-border-style">
+			@Model.GetPagination(Url, "Index","Admin")
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+
+							<th>
+								Image
+							</th>
+							<th>
+								Title
+							</th>
+							<th>
+								Category
+							</th>
+							<th>
+								Content
+							</th>
+							<th class="text-right">
+								<a asp-action="Create" class="btn btn-sm btn-primary">
+									<i class="fa-solid fa-plus"></i>
+								</a>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model.Items)
+						{
+							<tr data-entity-id="@item.Id">
+
+								<td>
+
+									<img class="admin-blog-img" src="~/uploads/images/blog/@item.ImagePath" />
+								</td>
+								<td>
+									@Html.DisplayFor(modelItem => item.Title)
+								</td>
+								<td>
+									@Html.DisplayFor(modelItem => item.Category.Name)
+								</td>
+								<td>
+									@item.Body.HtmlToPlainText().ToEllipse(30)
+								</td>
+								<td class="operate-cell text-right">
+									<a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square"></i> </a>
+									<a class="btn btn-sm btn-secondary" asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-eye"></i></a>
+									<a onclick="removeEntity(event,@item.Id,'@item.Title')" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section js{
+	<script src="~/admin/assets/libs/sweetalert/sweetalert.min.js"></script>
+
+	<script>
+		function removeEntity(ev,entityId,name) {
+			swal({
+				title: "Are you sure?",
+				text: `Once deleted, you will not be able to recover ${name} !`,
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			})
+				.then((willDelete) => {
+					if (willDelete) {
+
+
+						$.ajax({
+							url: `@Url.Action("Delete")/${entityId}`,
+							type: 'post',
+							success: function (response)
+							{
+								if (response.error == true) {
+									toastr.error(response.message, "Error!")
+									return;
+								}
+								toastr.success(response.message, "Success!")
+
+								$(`tr[data-entity-id=${entityId}]`).remove();
+							},
+							error: function (response) {console.warn(response) },
+						});
+					}
+				});
+		}
+	</script>
+}
+
+

@@ -3,7 +3,6 @@
 <html lang="en">
 
 
-<!-- Mirrored from d-themes.com/html/riode/demo23.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 24 Aug 2021 15:26:20 GMT -->
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
@@ -38,6 +37,8 @@
 	<link rel="stylesheet" type="text/css" href="~/assets/vendor/magnific-popup/magnific-popup.min.css">
 	<link rel="stylesheet" type="text/css" href="~/assets/vendor/owl-carousel/owl.carousel.min.css">
 
+	@RenderSection("css", required:false)
+	<link href="~/admin/assets/libs/toastr.js/toastr.css" rel="stylesheet" />
 	<!-- Main CSS File -->
 	<link rel="stylesheet" type="text/css" href="~/assets/css/style.min.css">
 	<link rel="stylesheet" type="text/css" href="~/assets/css/demo23.min.css">
@@ -72,7 +73,7 @@
 									<h4 class="widget-title">Subscribe to our Newsletter</h4>
 									<p class="mb-0">Get all the latest information, Sales and Offers.</p>
 								</div>
-								<form action="#" class="input-wrapper input-wrapper-inline">
+								<form method="post" id="frmSubscribe" class="input-wrapper input-wrapper-inline">
 									<input type="email" class="form-control" name="email" id="email"
 										   placeholder="Email address here..." required />
 									<button class="btn btn-primary btn-rounded btn-md ml-2" type="submit">
@@ -455,24 +456,65 @@
 	<script src="~/assets/vendor/jquery.countdown/jquery.countdown.min.js"></script>
 	<!-- Main JS File -->
 	<script src="~/assets/js/main.min.js"></script>
+	<script src="~/admin/assets/libs/toastr.js/toastr.min.js"></script>
 
 	<script>
 		$(document).ready(function () {
 
 
-			$.ajax({
-				type: "POST",
-				url: "https://localhost:44397/home/contact",
-				success: function (response) {
-					console.log(response);
-				}
+			$("#frmSubscribe").submit(function (e) {
+				e.preventDefault();
+
+				//if ($(e.currentTarget).valid() != true)
+				//	return;
+
+				const formData = new FormData(e.currentTarget);
+
+				$.ajax({
+					url: "@Url.Action("Subscribe","Home")",
+					type: "post",
+					data: formData,
+					contentType: false,
+					processData: false,
+					success: function (response) {
+						if (response.error == true) {
+							toastr.error(response.message, "Error!")
+							return;
+						}
+						toastr.success(response.message, "You sucessfully subscribed!")
+						$(".form-control").val("");
+					},
+					error: function (response) { }
+				});
+
 			});
 
-
 		});
+		toastr.options = {
+			"closeButton": true,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": true,
+			"positionClass": "toast-bottom-right",
+			"preventDuplicates": true,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+
+
+
 	</script>
+
+	@RenderSection("js", required: false)
+
 </body>
 
 
-<!-- Mirrored from d-themes.com/html/riode/demo23.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 24 Aug 2021 15:26:57 GMT -->
 </html>
