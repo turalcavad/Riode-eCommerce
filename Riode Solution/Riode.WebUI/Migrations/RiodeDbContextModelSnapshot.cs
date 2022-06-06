@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Riode.WebUI.Models.DataContexts;
+using Riode.Data.DataContexts;
 
 namespace Riode.WebUI.Migrations
 {
@@ -19,7 +19,7 @@ namespace Riode.WebUI.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.BlogPost", b =>
+            modelBuilder.Entity("Riode.Data.Entities.BlogPost", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -57,7 +57,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("BlogPosts");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.BlogPostTag", b =>
+            modelBuilder.Entity("Riode.Data.Entities.BlogPostTag", b =>
                 {
                     b.Property<int>("BlogPostId")
                         .HasColumnType("int");
@@ -72,7 +72,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("BlogPostTags");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Brand", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Brand", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -100,7 +100,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("Brands");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Category", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -132,7 +132,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.ContactComment", b =>
+            modelBuilder.Entity("Riode.Data.Entities.ContactComment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -177,7 +177,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("ContactComments");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Faq", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Faq", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -207,7 +207,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("Faqs");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Membership.RiodeRole", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Membership.RiodeRole", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -236,7 +236,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("Roles", "Membership");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Membership.RiodeRoleClaim", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Membership.RiodeRoleClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -259,7 +259,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("RoleClaims", "Membership");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Membership.RiodeUser", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Membership.RiodeUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -334,7 +334,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("Users", "Membership");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Membership.RiodeUserClaim", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Membership.RiodeUserClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -357,7 +357,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("UserClaims", "Membership");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Membership.RiodeUserLogin", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Membership.RiodeUserLogin", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -378,7 +378,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("UserLogins", "Membership");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Membership.RiodeUserRole", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Membership.RiodeUserRole", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -393,7 +393,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("UserRoles", "Membership");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Membership.RiodeUserToken", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Membership.RiodeUserToken", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -412,7 +412,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("UserTokens", "Membership");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.PostTag", b =>
+            modelBuilder.Entity("Riode.Data.Entities.PostTag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -439,7 +439,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("PostTags");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Product", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -485,7 +485,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.ProductColor", b =>
+            modelBuilder.Entity("Riode.Data.Entities.ProductColor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -515,7 +515,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("Colors");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.ProductImage", b =>
+            modelBuilder.Entity("Riode.Data.Entities.ProductImage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -550,7 +550,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("ProductImages");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.ProductPricing", b =>
+            modelBuilder.Entity("Riode.Data.Entities.ProductPricing", b =>
                 {
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -585,7 +585,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("ProductPricing");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.ProductSize", b =>
+            modelBuilder.Entity("Riode.Data.Entities.ProductSize", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -615,7 +615,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("Sizes");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.ProductSpecification", b =>
+            modelBuilder.Entity("Riode.Data.Entities.ProductSpecification", b =>
                 {
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -633,7 +633,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("ProductSpecifications");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Specification", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Specification", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -660,7 +660,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("Specifications");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Subscribe", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Subscribe", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -699,9 +699,9 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("Subscribes");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.BlogPost", b =>
+            modelBuilder.Entity("Riode.Data.Entities.BlogPost", b =>
                 {
-                    b.HasOne("Riode.WebUI.Models.Entities.Category", "Category")
+                    b.HasOne("Riode.Data.Entities.Category", "Category")
                         .WithMany("BlogPosts")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -710,15 +710,15 @@ namespace Riode.WebUI.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.BlogPostTag", b =>
+            modelBuilder.Entity("Riode.Data.Entities.BlogPostTag", b =>
                 {
-                    b.HasOne("Riode.WebUI.Models.Entities.BlogPost", "BlogPost")
+                    b.HasOne("Riode.Data.Entities.BlogPost", "BlogPost")
                         .WithMany("Tags")
                         .HasForeignKey("BlogPostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Riode.WebUI.Models.Entities.PostTag", "PostTag")
+                    b.HasOne("Riode.Data.Entities.PostTag", "PostTag")
                         .WithMany("Tags")
                         .HasForeignKey("PostTagId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -729,75 +729,75 @@ namespace Riode.WebUI.Migrations
                     b.Navigation("PostTag");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Category", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Category", b =>
                 {
-                    b.HasOne("Riode.WebUI.Models.Entities.Category", "Parent")
+                    b.HasOne("Riode.Data.Entities.Category", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId");
 
                     b.Navigation("Parent");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Membership.RiodeRoleClaim", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Membership.RiodeRoleClaim", b =>
                 {
-                    b.HasOne("Riode.WebUI.Models.Entities.Membership.RiodeRole", null)
+                    b.HasOne("Riode.Data.Entities.Membership.RiodeRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Membership.RiodeUserClaim", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Membership.RiodeUserClaim", b =>
                 {
-                    b.HasOne("Riode.WebUI.Models.Entities.Membership.RiodeUser", null)
+                    b.HasOne("Riode.Data.Entities.Membership.RiodeUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Membership.RiodeUserLogin", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Membership.RiodeUserLogin", b =>
                 {
-                    b.HasOne("Riode.WebUI.Models.Entities.Membership.RiodeUser", null)
+                    b.HasOne("Riode.Data.Entities.Membership.RiodeUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Membership.RiodeUserRole", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Membership.RiodeUserRole", b =>
                 {
-                    b.HasOne("Riode.WebUI.Models.Entities.Membership.RiodeRole", null)
+                    b.HasOne("Riode.Data.Entities.Membership.RiodeRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Riode.WebUI.Models.Entities.Membership.RiodeUser", null)
+                    b.HasOne("Riode.Data.Entities.Membership.RiodeUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Membership.RiodeUserToken", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Membership.RiodeUserToken", b =>
                 {
-                    b.HasOne("Riode.WebUI.Models.Entities.Membership.RiodeUser", null)
+                    b.HasOne("Riode.Data.Entities.Membership.RiodeUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Product", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Product", b =>
                 {
-                    b.HasOne("Riode.WebUI.Models.Entities.Brand", "Brand")
+                    b.HasOne("Riode.Data.Entities.Brand", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Riode.WebUI.Models.Entities.Category", "Category")
+                    b.HasOne("Riode.Data.Entities.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -808,9 +808,9 @@ namespace Riode.WebUI.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.ProductImage", b =>
+            modelBuilder.Entity("Riode.Data.Entities.ProductImage", b =>
                 {
-                    b.HasOne("Riode.WebUI.Models.Entities.Product", "Product")
+                    b.HasOne("Riode.Data.Entities.Product", "Product")
                         .WithMany("Images")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -819,21 +819,21 @@ namespace Riode.WebUI.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.ProductPricing", b =>
+            modelBuilder.Entity("Riode.Data.Entities.ProductPricing", b =>
                 {
-                    b.HasOne("Riode.WebUI.Models.Entities.ProductColor", "Color")
+                    b.HasOne("Riode.Data.Entities.ProductColor", "Color")
                         .WithMany()
                         .HasForeignKey("ColorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Riode.WebUI.Models.Entities.Product", "Product")
+                    b.HasOne("Riode.Data.Entities.Product", "Product")
                         .WithMany("Pricing")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Riode.WebUI.Models.Entities.ProductSize", "Size")
+                    b.HasOne("Riode.Data.Entities.ProductSize", "Size")
                         .WithMany()
                         .HasForeignKey("SizeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -846,15 +846,15 @@ namespace Riode.WebUI.Migrations
                     b.Navigation("Size");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.ProductSpecification", b =>
+            modelBuilder.Entity("Riode.Data.Entities.ProductSpecification", b =>
                 {
-                    b.HasOne("Riode.WebUI.Models.Entities.Product", "Product")
+                    b.HasOne("Riode.Data.Entities.Product", "Product")
                         .WithMany("Specifications")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Riode.WebUI.Models.Entities.Specification", "Specification")
+                    b.HasOne("Riode.Data.Entities.Specification", "Specification")
                         .WithMany("Specifications")
                         .HasForeignKey("SpecificationId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -865,24 +865,24 @@ namespace Riode.WebUI.Migrations
                     b.Navigation("Specification");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.BlogPost", b =>
+            modelBuilder.Entity("Riode.Data.Entities.BlogPost", b =>
                 {
                     b.Navigation("Tags");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Category", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Category", b =>
                 {
                     b.Navigation("BlogPosts");
 
                     b.Navigation("Children");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.PostTag", b =>
+            modelBuilder.Entity("Riode.Data.Entities.PostTag", b =>
                 {
                     b.Navigation("Tags");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Product", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Product", b =>
                 {
                     b.Navigation("Images");
 
@@ -891,7 +891,7 @@ namespace Riode.WebUI.Migrations
                     b.Navigation("Specifications");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Specification", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Specification", b =>
                 {
                     b.Navigation("Specifications");
                 });

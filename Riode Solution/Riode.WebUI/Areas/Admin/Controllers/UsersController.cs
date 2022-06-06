@@ -2,11 +2,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Riode.WebUI.AppCode.Extensions;
-using Riode.WebUI.AppCode.Infrastructure;
-using Riode.WebUI.AppCode.Modules.UserModule;
-using Riode.WebUI.Models.DataContexts;
-using Riode.WebUI.Models.Entities.Membership;
+using Riode.Core.Extensions;
+using Riode.Core.Infrastructure;
+using Riode.Business.Modules.UserModule;
+using Riode.Core.Providers;
+using Riode.Data.DataContexts;
+using Riode.Data.Entities.Membership;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +46,7 @@ namespace Riode.WebUI.Areas.Admin.Controllers
 								  select Tuple.Create(r.Id, r.Name, lj != null)).ToListAsync();
 
 
-			ViewBag.Claims = (from p in Program.principals
+			ViewBag.Claims = (from p in AppClaimProvider.principals
 							  join uc in db.UserClaims on new { ClaimValue = "1", ClaimType = p, UserId = user.Id } equals new { uc.ClaimValue, uc.ClaimType, uc.UserId } into lJoin
 							  from lj in lJoin.DefaultIfEmpty()
 							  select Tuple.Create(p, lj != null)).ToList();
@@ -66,7 +67,7 @@ namespace Riode.WebUI.Areas.Admin.Controllers
 								   select Tuple.Create(r.Id, r.Name, lj != null)).ToListAsync();
 
 
-			ViewBag.Claims = (from p in Program.principals
+			ViewBag.Claims = (from p in AppClaimProvider.principals
 							  join uc in db.UserClaims on new { ClaimValue = "1", ClaimType = p, UserId = user.Id } equals new { uc.ClaimValue, uc.ClaimType, uc.UserId } into lJoin
 							  from lj in lJoin.DefaultIfEmpty()
 							  select Tuple.Create(p, lj != null)).ToList();
@@ -167,7 +168,7 @@ namespace Riode.WebUI.Areas.Admin.Controllers
 			#region Check user and claims
 
 			var user = await db.Users.FirstOrDefaultAsync(u => u.Id == userId);
-			var hasClaim = Program.principals.Contains(claimName);
+			var hasClaim = AppClaimProvider.principals.Contains(claimName);
 
 			int currentUserId = User.GetUserId();
 

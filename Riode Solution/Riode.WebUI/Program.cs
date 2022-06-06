@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Riode.Core.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,14 +15,13 @@ namespace Riode.WebUI
 {
 	public class Program
 	{
-		static internal string[] principals = null;
 
 		public static void Main(string[] args)
 		{
 			var types = typeof(Program).Assembly.GetTypes();
 
 
-			principals = types
+			AppClaimProvider.principals = types
 					.Where(t => typeof(ControllerBase).IsAssignableFrom(t) && t.IsDefined(typeof(AuthorizeAttribute), true))
 					.SelectMany(t => t.GetCustomAttributes<AuthorizeAttribute>())
 					.Union(types

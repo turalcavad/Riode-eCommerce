@@ -1,10 +1,10 @@
-﻿using Riode.WebUI.Models.Entities;
+﻿using Riode.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Riode.WebUI.Models.ViewModels
+namespace Riode.Data.ViewModels
 {
 	public class SinglePostViewModel
 	{

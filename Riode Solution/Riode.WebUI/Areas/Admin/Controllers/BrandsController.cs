@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Riode.WebUI.AppCode.Modules.BrandModule;
+using Riode.Business.Modules.BrandModule;
 using System.Threading.Tasks;
 
 namespace Riode.WebUI.Areas.Admin.Controllers

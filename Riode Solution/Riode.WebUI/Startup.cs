@@ -12,9 +12,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Riode.WebUI.AppCode.Providers;
-using Riode.WebUI.Models.DataContexts;
-using Riode.WebUI.Models.Entities.Membership;
+using Riode.Core.Providers;
+using Riode.Data.DataContexts;
+using Riode.Data.Entities.Membership;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -80,7 +80,7 @@ namespace Riode.WebUI
 			services.AddAuthentication();
 			services.AddAuthorization(cfg=> 
 			{
-			foreach (var policyName in Program.principals)
+			foreach (var policyName in AppClaimProvider.principals)
 				{
 					cfg.AddPolicy(policyName, p =>
 					{
@@ -95,16 +95,22 @@ namespace Riode.WebUI
 			services.AddScoped<UserManager<RiodeUser>>();
 			services.AddScoped<SignInManager<RiodeUser>>();
 
-			services.AddMediatR(this.GetType().Assembly);
+
+			var assemblies = AppDomain.CurrentDomain.GetAssemblies()
+				.Where(a => a.FullName.StartsWith("Riode.")).ToArray();
+			services.AddMediatR(assemblies);
+
+
+			services.AddFluentValidation(cfg =>
+			{
+				cfg.RegisterValidatorsFromAssemblies(assemblies);
+			});
+
+
 			services.AddTransient<IActionContextAccessor, ActionContextAccessor>();
 
 			services.AddScoped<IClaimsTransformation, AppClaimProvider>();
 
-			services.AddFluentValidation(cfg =>
-			{
-				cfg.RegisterValidatorsFromAssemblies(new[] { this.GetType().Assembly });
-			});
-			
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

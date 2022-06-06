@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Riode.WebUI.Models.DataContexts;
-using Riode.WebUI.Models.Entities;
+using Riode.Data.DataContexts;
+using Riode.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

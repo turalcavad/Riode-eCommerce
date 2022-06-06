@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Riode.WebUI.Models.DataContexts;
+using Riode.Data.DataContexts;
 
 namespace Riode.WebUI.Migrations
 {
@@ -21,7 +21,7 @@ namespace Riode.WebUI.Migrations
                 .HasAnnotation("ProductVersion", "5.0.15")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Blog", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Blog", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -42,7 +42,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("Blogs");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Brand", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Brand", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -58,7 +58,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("Brands");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Category", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -78,7 +78,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Faq", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Faq", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -96,7 +96,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("Faqs");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.ProductColor", b =>
+            modelBuilder.Entity("Riode.Data.Entities.ProductColor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -114,7 +114,7 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("Colors");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.ProductSize", b =>
+            modelBuilder.Entity("Riode.Data.Entities.ProductSize", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -132,16 +132,16 @@ namespace Riode.WebUI.Migrations
                     b.ToTable("Sizes");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Category", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Category", b =>
                 {
-                    b.HasOne("Riode.WebUI.Models.Entities.Category", "Parent")
+                    b.HasOne("Riode.Data.Entities.Category", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId");
 
                     b.Navigation("Parent");
                 });
 
-            modelBuilder.Entity("Riode.WebUI.Models.Entities.Category", b =>
+            modelBuilder.Entity("Riode.Data.Entities.Category", b =>
                 {
                     b.Navigation("Children");
                 });

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Riode.WebUI.Models.DataContexts;
-using Riode.WebUI.Models.ViewModels;
+using Riode.Data.DataContexts;
+using Riode.Data.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
